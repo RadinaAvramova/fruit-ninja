@@ -6,10 +6,6 @@ var state = require( "../state" );
 
 var exponential = tween.exponential.co;
 
-/**
- * "game-over"模块
- */
-
 exports.anims = [];
 
 exports.set = function(){
@@ -32,7 +28,6 @@ exports.hide = function( start ){
 	});
 };
 
-// 显示/隐藏 相关
 
 exports.onZoomStart = function( sz, ez, mode ){
 	if( mode == "show" )
