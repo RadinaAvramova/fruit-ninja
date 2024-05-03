@@ -11,9 +11,6 @@ var juice = require( "../factory/juice" );
 var ie = Ucren.isIe;
 var safari = Ucren.isSafari;
 
-/**
- * 水果模块模型
- */
 
 var zoomAnim = tween.exponential.co;
 var rotateAnim = tween.circular;
@@ -144,7 +141,6 @@ ClassFruit.prototype.pause = function(){
 	    this.flame.remove();
 };
 
-// 分开
 ClassFruit.prototype.apart = function( angle ){
 	this.anims.clear();
 	this.image.hide();
@@ -169,7 +165,6 @@ ClassFruit.prototype.apart = function( angle ){
 	});
 };
 
-// 抛出
 ClassFruit.prototype.shotOut = function(){
 	var sign = [ -1, 1 ];
     return function( start, endX ){
@@ -193,7 +188,6 @@ ClassFruit.prototype.shotOut = function(){
 	};
 }();
 
-// 掉落
 ClassFruit.prototype.fallOff = function(){
 	var sign = [ -1, 1 ];
 	var signIndex = 0;
@@ -249,7 +243,6 @@ ClassFruit.prototype.remove = function(){
 	message.postMessage( this, "fruit.remove" );
 };
 
-// 显示/隐藏 相关
 
 ClassFruit.prototype.onShowStart = function(){
 	this.image.show();
@@ -265,7 +258,6 @@ ClassFruit.prototype.onHideEnd = function(){
 	this.remove();
 };
 
-// 旋转相关
 
 ClassFruit.prototype.onRotateStart = function(){
 	
@@ -275,7 +267,6 @@ ClassFruit.prototype.onRotating = function( time ){
 	this.image.rotate( ( this.rotateSpeed * time / 1e3 ) % 360, true );
 };
 
-// 裂开相关
 
 ClassFruit.prototype.onBrokenDropUpdate = function( time ){
 	var radius = this.radius;
@@ -308,7 +299,6 @@ ClassFruit.prototype.onBrokenDropEnd = function(){
 	this.remove();
 };
 
-// 抛出相关
 
 ClassFruit.prototype.onShotOuting = function( time ){
 	this.pos(
@@ -325,7 +315,6 @@ ClassFruit.prototype.onShotOutEnd = function(){
 	this.fallOff( 0, this.fallOffToX );
 };
 
-// 掉落相关
 
 ClassFruit.prototype.onFalling = function( time ){
 	var y;
