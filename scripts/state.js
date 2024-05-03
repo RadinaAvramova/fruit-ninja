@@ -1,8 +1,4 @@
-/**
- * a simple state manager
- * @author 	dron
- * @date 	2012-06-28
- */
+
 var Ucren = require( "lib/ucren" );
 var timeline = require( "timeline" );
 
