@@ -1,8 +1,4 @@
 
-/**
- * 火焰模块
- * @author zswang, dron
- */
 
 var layer = require( "../layer" ).getLayer( "fruit" );
 var timeline = require( "../timeline" );
@@ -16,7 +12,6 @@ raphael.path('M 27,122 Q 9,42 27,21 45,42 27,122')
 	});
 */
 
-// 缩写
 var math = Math, cos = math.cos, sin = math.sin,
 	trunc = parseInt,
 	random = math.random,
@@ -24,13 +19,6 @@ var math = Math, cos = math.cos, sin = math.sin,
 
 var guid = 0;
 
-/**
- * 添加一个火苗
- * @param{Array} center 中心位置 单位像素
- * @param{Number} angle 运动方向 单位幅度
- * @param{Number} length 运动长度 单位像素
- * @param{Number} life 存活时间 单位毫秒
- */
 function appendFlame( center, angle, length, life, flames ){
 	return flames[guid] = {
 		id: guid ++,
