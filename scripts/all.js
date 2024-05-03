@@ -59,9 +59,7 @@ define("scripts/collide.js", function(exports){
 			return [ (-1 * b + Math.sqrt(delta)) / (2 * a),  (-1 * b - Math.sqrt(delta)) / (2 * a) ];
 	}
 	
-	// 返回线段和椭圆的两个交点，如果不相交，返回 null
 	function lineXEllipse( p1, p2, c, r, e ){
-		// 线段：p1, p2    圆心：c    半径：r    离心率：e
 		if (r <= 0) return;
 		e = e === undefined ? 1 : e;
 		var t1 = r, t2 = r * e, k;
@@ -91,7 +89,6 @@ define("scripts/collide.js", function(exports){
 		return result;
 	}
 	
-	// 判断计算线段和椭圆是否相交
 	function lineInEllipse( p1, p2, c, r, e ){
 		var t = lineXEllipse( p1, p2, c, r, e );
 		return t && ( t[0] || t[1] );
@@ -222,7 +219,7 @@ define("scripts/game.js", function(exports){
 	    gameOver.show();
 	    // timeline.setTimeout(function(){
 	    //     // sence.switchSence( "home-menu" );
-	    //     // TODO: require 出现互相引用时，造成死循环，这个问题需要跟进，这里暂时用 postMessage 代替
+	    //     // TODO: require postMessage 
 	    //     message.postMessage( "home-menu", "sence.switchSence" );
 	    // }, 2000);
 	
@@ -472,19 +469,11 @@ define("scripts/main.js", function(exports){
  * @source D:\hosting\demos\fruit-ninja\output\scripts\message.js
  */ 
 define("scripts/message.js", function(exports){
-	/**
-	 * a simple message manager
-	 * @author dron
-	 * @date 2012-06-27
-	 */
+
 	
 	var Ucren = require("scripts/lib/ucren");
 	
-	/**
-	 * send a message
-	 * @param  {Any} message,message...		message contents
-	 * @param  {String} to 					message address
-	 */
+
 	exports.postMessage = function( message/*, message, message... */, to ){
 		var messages = [].slice.call( arguments, 0 ),
 			splitIndex = messages.length - 1;
@@ -495,11 +484,7 @@ define("scripts/message.js", function(exports){
 		Ucren.dispatch( to, messages );
 	};
 	
-	/**
-	 * bind an message handler
-	 * @param {String}   from 	message address
-	 * @param {Function} fn 	message handler
-	 */
+
 	exports.addEventListener = function( from, fn ){
 		Ucren.dispatch( from, fn );
 	};
@@ -1560,9 +1545,6 @@ define("scripts/factory/rotate.js", function(exports){
 	var timeline = require("scripts/timeline");
 	var Ucren = require("scripts/lib/ucren");
 	
-	/**
-	 * 旋转类模块模型
-	 */
 	
 	exports.create = function( imageSrc, x, y, w, h, z, anim, animDur ){
 		var module = {}, image;
@@ -1637,33 +1619,7 @@ define("scripts/factory/rotate.js", function(exports){
  * @source D:\hosting\demos\fruit-ninja\output\scripts\lib\buzz.js
  */ 
 define("scripts/lib/buzz.js", function(exports){
-	// ----------------------------------------------------------------------------
-	// Buzz, a Javascript HTML5 Audio library
-	// v 1.0.x beta
-	// Licensed under the MIT license.
-	// http://buzz.jaysalvat.com/
-	// ----------------------------------------------------------------------------
-	// Copyright (C) 2011 Jay Salvat
-	// http://jaysalvat.com/
-	// ----------------------------------------------------------------------------
-	// Permission is hereby granted, free of charge, to any person obtaining a copy
-	// of this software and associated documentation files ( the "Software" ), to deal
-	// in the Software without restriction, including without limitation the rights
-	// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	// copies of the Software, and to permit persons to whom the Software is
-	// furnished to do so, subject to the following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included in
-	// all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-	// THE SOFTWARE.
-	// ----------------------------------------------------------------------------
+	
 	
 	var buzz = {
 	    defaults: {
@@ -2503,12 +2459,7 @@ define("scripts/lib/buzz.js", function(exports){
  * @source D:\hosting\demos\fruit-ninja\output\scripts\lib\raphael.js
  */ 
 define("scripts/lib/raphael.js", function(exports){
-	/*
-	 * Raphael 1.5.2 - JavaScript Vector Library
-	 *
-	 * Copyright (c) 2010 Dmitry Baranovskiy (http://raphaeljs.com)
-	 * Licensed under the MIT (http://raphaeljs.com/license.html) license.
-	 */
+
 	
 	var Raphael;
 	var window = {};
@@ -2523,12 +2474,9 @@ define("scripts/lib/raphael.js", function(exports){
  * @source D:\hosting\demos\fruit-ninja\output\scripts\lib\sound.js
  */ 
 define("scripts/lib/sound.js", function(exports){
-	/**
-	 * 简易声效控制
-	 */
+
 	
 	/**
-	 * 使用方法：
 	 * 
 	 * var sound = require("scripts/lib/sound/main");
 	 * 
@@ -2594,24 +2542,13 @@ define("scripts/lib/tween.js", function(exports){
  * @source D:\hosting\demos\fruit-ninja\output\scripts\lib\ucren.js
  */ 
 define("scripts/lib/ucren.js", function(exports){
-	/**
-	 * ucren-lite
-	 * filename: boot.js
-	 * author: dron
-	 * version: 5.0.2.20120628
-	 * date: 2009-03-15
-	 * contact: ucren.com
-	 */
-	
+
 	var Ucren;
 	
 	var blankArray = [];
 	var slice = blankArray.slice;
 	var join = blankArray.join;
-	
-	//
-	// [基本数据类型扩展]
-	//
+
 	
 	// String.prototype.trim
 	if(!String.prototype.trim)
@@ -2766,9 +2703,6 @@ define("scripts/lib/ucren.js", function(exports){
 	
 	Ucren = {
 	
-		//
-		// [全局属性]
-		//
 	
 		// Ucren.isIe
 		isIe: /msie/i.test(navigator.userAgent),
@@ -3278,9 +3212,7 @@ define("scripts/lib/ucren.js", function(exports){
 		// }()
 	};
 	
-	//
-	// [底层操作类]
-	//
+	
 	
 	// Ucren.BasicDrag
 	Ucren.BasicDrag = Ucren.Class(
@@ -3830,12 +3762,7 @@ define("scripts/lib/ucren.js", function(exports){
 			},
 	
 			useMouseAction: function(className, actions){
-				/**
-				 *  调用示例:  el.useMouseAction("xbutton", "over,out,down,up");
-				 *  使用效果:  el 会在 "xbutton xbutton-over","xbutton xbutton-out","xbutton xbutton-down","xbutton xbutton-up"
-				 *             等四个 className 中根据相应的鼠标事件来进行切换。
-				 *  特别提示:  useMouseAction 可使用不同参数多次调用。
-				 */
+			
 				if(!this.MouseAction)
 					this.MouseAction = new Ucren.MouseAction({ element: this });
 				this.MouseAction.use(className, actions);
@@ -3956,9 +3883,7 @@ define("scripts/object/developing.js", function(exports){
 			recycle: this.anims
 		});
 	};
-	
-	// 显示/隐藏 相关
-	
+		
 	exports.onZoomStart = function(){
 		this.image.show();
 	};
@@ -3993,12 +3918,7 @@ define("scripts/object/dojo.js", function(exports){
  * @source D:\hosting\demos\fruit-ninja\output\scripts\object\flame.js
  */ 
 define("scripts/object/flame.js", function(exports){
-	
-	/**
-	 * 火焰模块
-	 * @author zswang, dron
-	 */
-	
+
 	var layer = require("scripts/layer").getLayer( "fruit" );
 	var timeline = require("scripts/timeline");
 	var Ucren = require("scripts/lib/ucren");
@@ -4019,13 +3939,6 @@ define("scripts/object/flame.js", function(exports){
 	
 	var guid = 0;
 	
-	/**
-	 * 添加一个火苗
-	 * @param{Array} center 中心位置 单位像素
-	 * @param{Number} angle 运动方向 单位幅度
-	 * @param{Number} length 运动长度 单位像素
-	 * @param{Number} life 存活时间 单位毫秒
-	 */
 	function appendFlame( center, angle, length, life, flames ){
 		return flames[guid] = {
 			id: guid ++,
@@ -4221,10 +4134,6 @@ define("scripts/object/game-over.js", function(exports){
 	
 	var exponential = tween.exponential.co;
 	
-	/**
-	 * "game-over"模块
-	 */
-	
 	exports.anims = [];
 	
 	exports.set = function(){
@@ -4246,9 +4155,7 @@ define("scripts/object/game-over.js", function(exports){
 			recycle: this.anims
 		});
 	};
-	
-	// 显示/隐藏 相关
-	
+		
 	exports.onZoomStart = function( sz, ez, mode ){
 		if( mode == "show" )
 			this.image.show();
@@ -4302,10 +4209,6 @@ define("scripts/object/knife.js", function(exports){
 	var timeline = require("scripts/timeline");
 	var layer = require("scripts/layer").getLayer( "knife" );
 	var Ucren = require("scripts/lib/ucren");
-	
-	/**
-	 * 刀光模块
-	 */
 	
 	var lastX = null, lastY = null;
 	var abs = Math.abs;
@@ -4608,9 +4511,7 @@ define("scripts/object/lose.js", function(exports){
 	        recycle: this.anims
 	    });
 	};
-	
-	// 显示/隐藏 相关
-	
+		
 	exports.onTimeUpdate = function( time, mode, x1s, x1e, x2s, x2e, x3s, x3e ){
 	    o1.attr( "x", anim( time, x1s, x1e - x1s, animLength ) );
 	    o2.attr( "x", anim( time, x2s, x2e - x2s, animLength ) );
@@ -4734,9 +4635,7 @@ define("scripts/object/new.js", function(exports){
 	    this.anims.clear();
 	    timeline.createTask({ start: 0, duration: -1, object: this, onTimeUpdate: this.onJumping, recycle: this.anims });
 	};
-	
-	// 显示相关
-	
+		
 	exports.onShowStart = function(){
 	};
 	
@@ -4752,9 +4651,7 @@ define("scripts/object/new.js", function(exports){
 	exports.onShowEnd = function(){
 	    this.jump();
 	};
-	
-	// 跳跃相关
-	
+		
 	exports.onJumping = function(time){
 		var t = parseInt(time / cycleTime);
 	
@@ -4810,11 +4707,7 @@ define("scripts/object/score.js", function(exports){
 	var anim = tween.exponential.co;
 	
 	var message = require("scripts/message");
-	
-	/**
-	 * 分数模块
-	 */
-	
+
 	var image, text1, text2, animLength = 500;;
 	
 	var imageSx = -94, imageEx = 6;
@@ -4854,7 +4747,6 @@ define("scripts/object/score.js", function(exports){
 	    // message.postMessage( number, "score.change" );
 	};
 	
-	// 显示/隐藏 相关
 	
 	exports.onTimeUpdate = function( time, mode, isx, iex, t1sx, t1ex, t2sx, t2ex ){
 	    image.attr( "x", anim( time, isx, iex - isx, animLength ) );
