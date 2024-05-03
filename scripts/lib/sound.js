@@ -1,9 +1,4 @@
 /**
- * 简易声效控制
- */
-
-/**
- * 使用方法：
  * 
  * var sound = require( "sound/main" );
  * 
