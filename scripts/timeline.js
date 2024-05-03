@@ -1,8 +1,3 @@
-/**
- * a easy timeline manager
- * @version 1.0
- * @author dron
- */
 
 var Ucren = require( "lib/ucren" );
 var timerCache = {};
@@ -51,11 +46,7 @@ ClassTimer.prototype.init = function( ms ){
 };
 
 
-/**
- * create a task
- * @param  {Object} conf 	the config
- * @return {Task} 			a task instance
- */
+
 ClassTimer.prototype.createTask = function( conf ){
 	/* e.g. timer.createTask({
 		start: 500, duration: 2000, data: [a, b, c,..], object: module, 
@@ -74,12 +65,7 @@ ClassTimer.prototype.createTask = function( conf ){
     return task;
 };
 
-/**
- * use a array to recycle the task
- * @param  {Array} queue	be use for recycling task
- * @param  {Task} task 		a task instance		
- * @return {Array}			this queue
- */
+
 ClassTimer.prototype.taskList = function( queue, task ){
 	if( !queue.clear )
 		queue.clear = function(){
@@ -97,21 +83,13 @@ ClassTimer.prototype.taskList = function( queue, task ){
 	return queue;
 };
 
-/**
- * create a timer for once callback
- * @param {Function} fn 	callback function
- * @param {Number}   time 	time, unit: ms
- */
+
 ClassTimer.prototype.setTimeout = function( fn, time ){
     // e.g. setTimeout(fn, time);
     return this.createTask({ start: time, duration: 0, onTimeStart: fn });
 };
 
-/**
- * create a timer for ongoing callback
- * @param {Function} fn 	callback function
- * @param {Number}   time 	time, unit: ms
- */
+
 ClassTimer.prototype.setInterval = function( fn, time ){
     // e.g. setInterval(fn, time);
     var timer = setInterval( fn, time );
@@ -122,10 +100,7 @@ ClassTimer.prototype.setInterval = function( fn, time ){
     };
 };
 
-/**
- * get the current fps
- * @return {Number} fps number
- */
+
 ClassTimer.prototype.getFPS = function(){
 	var t = now(), c = this.count, fps = c / ( t - this.startTime ) * 1e3;
 	if( c > 1e3 )
